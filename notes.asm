@@ -31,6 +31,9 @@ section .text					; the code is stored in this section
 		
 		MUL ebx						; multiplies EAX by EBX and then is stored in EAX
 		DIV ebx		        		; Divides EAX by EDX and then is stored in EAX
+		
+		DEC eax			: decrements eax by 1
+		INC eax			; increments eax by 1
 	
 
 section .data					; the data section stores data that can be referenced
