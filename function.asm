@@ -11,6 +11,9 @@ _start:
 	push msg		; Arguments to be passed to the function
 
 	call print
+	
+	mov eax, 1		; Remember to end the program
+	int 0x80
 
 print:
 	; the prologue and epilogue must be in every function
@@ -23,8 +26,8 @@ print:
 
 	mov eax, 4
 	mov ebx, 1
-	mov ecx, msg				; body of function
-	mov edx, len
+	mov ecx, [ebp+8]				; [ebp+8] is the first position of the argument
+	mov edx, len					; then add 4 for the second argument
 	int 0x80
 
 	; start of epilogue
