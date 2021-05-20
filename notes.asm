@@ -32,8 +32,11 @@ section .text					; the code is stored in this section
 		MUL ebx						; multiplies EAX by EBX and then is stored in EAX
 		DIV ebx		        		; Divides EAX by EDX and then is stored in EAX
 		
-		DEC eax			: decrements eax by 1
+		DEC eax			; decrements eax by 1
 		INC eax			; increments eax by 1
+
+		MOV [msg], byte 'B'			; this will change the word into "Bello World"
+		MOV [msg+1], byte 'B'		; this will change the word into "BBllo World"
 	
 
 section .data					; the data section stores data that can be referenced
@@ -44,6 +47,10 @@ section .data					; the data section stores data that can be referenced
 
 	len equ $ - msg				; this gives the length of the string by subtracting where it ends
 								; by where it starts
+
+	dat db 0x12					; db is 1 byte
+	d2t dw 1000					; dw is 2 bytes long
+	d4t dd 100000				; dd is 4 bytes long 32bit
 
 
 
