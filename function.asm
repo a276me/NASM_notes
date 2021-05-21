@@ -25,7 +25,7 @@ print:
                                 ; in case the program is doing nested functions
     mov ebp, esp                ; Save the value for the stack pointer in case the program needs it
                                 ; (esp=stack pointer)
-    pusha                        ;push all registers on the stack
+    pusha                       ; push all registers on the stack
     ; end of prologue
 
     mov eax, 4
@@ -34,10 +34,11 @@ print:
     mov edx, len                    ; then add 4 for the second argument
     int 0x80
 
-    mov eax, 1                    ; Store the return value in the eax register
-
     ; start of epilogue
+
     popa                        ; pop all the original data back to registers
+    mov eax, 1                    ; Store the return value in the eax register 
+				 ; optional if you have a return value
     mov esp, ebp                    ; Restore the stack pointer to where it was
     pop ebp                        ; pop the original value of the ebp back to the ebp
     ret
