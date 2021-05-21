@@ -30,6 +30,8 @@ print:
 	mov edx, len					; then add 4 for the second argument
 	int 0x80
 
+	mov eax, 1					; Store the return value in the eax register
+
 	; start of epilogue
 	mov esp, ebp
 	pop ebp
