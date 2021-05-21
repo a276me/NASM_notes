@@ -4,15 +4,32 @@ global _start
 section .data
     msg db "Hi there", 0x0a
     len equ $-msg
+
+    msg2 db "Bye", 0x0a
+    len2 equ $-msg2
     
 
 section .text
 
 _start:
-    push msg        ; Arguments to be passed to the function
+
+    pusha                       ; push all registers on the stack
+    push msg        		; Arguments to be passed to the function
 
     call print
     
+    ; do something with the return value in eax
+    ; if nothing, then pop all the registers back
+
+    popa                        ; pop all the original data back to registers
+
+
+    pusha
+    push msg2
+
+    call print
+
+    popa
     
     mov eax, 1        ; Remember to end the program
     int 0x80
@@ -30,8 +47,8 @@ print:
 
     mov eax, 4
     mov ebx, 1
-    mov ecx, [ebp+8]                ; [ebp+8] is the first position of the argument
-    mov edx, len                    ; then add 4 for the second argument
+    mov ecx, [ebp+8]                ; [ebp+8] is the first position of the argument, add 4 for each argument
+    mov edx, len                    ; this is a bad ex. You should use the actual length of the string
     int 0x80
 
     ; start of epilogue
